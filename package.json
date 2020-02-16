@@ -1,26 +1,25 @@
 {
   "name": "lock-file-notifier",
-  "displayName": "lock-file-notifier",
-  "description": "Notifies if node_modules is upto-date with package-lock.json or yarn.lock file",
+  "displayName": "Lock File Notifier",
+  "description": "Notifies if node_modules is uptodate with yarn.lock file",
   "version": "0.0.1",
   "license": "MIT",
   "engines": {
     "vscode": "^1.42.0"
   },
+  "publisher": "ayudh",
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "Yarn"
+  ],
   "activationEvents": [
-    "onCommand:extension.helloWorld"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "extension.helloWorld",
-        "title": "Hello World"
-      }
-    ]
+    "commands": []
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",
