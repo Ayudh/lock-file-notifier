@@ -4,6 +4,20 @@
   "description": "Notifies if node_modules is uptodate with yarn.lock file",
   "version": "0.0.1",
   "license": "MIT",
+  "homepage": "https://github.com/Ayudh/lock-file-notifier/blob/master/README.md",
+  "author": {
+    "email": "ghari81189@gmail.com",
+    "name": "Hari G",
+    "url": "https://ayudh.github.io/"
+  },
+  "bugs": {
+    "url": "https://github.com/Ayudh/lock-file-notifier/issues",
+    "email": "ghari81189@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ayudh/lock-file-notifier.git"
+  },
   "engines": {
     "vscode": "^1.42.0"
   },
