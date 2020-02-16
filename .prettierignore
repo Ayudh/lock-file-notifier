@@ -1,5 +1,7 @@
 out
 yarn.lock
+.yarn/**
+.yarnrc
 .prettierignore
 .gitignore
 .editorconfig
