@@ -2,7 +2,7 @@
   "name": "lock-file-notifier",
   "displayName": "Lock File Notifier",
   "description": "Notifies if node_modules is uptodate with yarn.lock file",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "homepage": "https://github.com/Ayudh/lock-file-notifier/blob/master/README.md",
   "author": {
@@ -21,6 +21,7 @@
   "engines": {
     "vscode": "^1.42.0"
   },
+  "icon": "images/icon.jpg",
   "publisher": "ayudh",
   "categories": [
     "Other"
