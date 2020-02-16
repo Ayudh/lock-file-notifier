@@ -39,9 +39,13 @@
   "scripts": {
     "vscode:prepublish": "yarn run compile",
     "compile": "tsc -p ./",
-    "lint": "eslint src --ext ts",
-    "prettier": "prettier --write \"**/*\"",
     "watch": "tsc -watch -p ./",
+    "lint": "yarn eslint-check && yarn prettier-check",
+    "eslint-check": "eslint src --ext ts",
+    "prettier-check": "prettier --check \"**/*.{json,md}\"",
+    "lint-fix": "yarn eslint-fix && yarn prettier-fix",
+    "eslint-fix": "eslint src --ext ts --fix",
+    "prettier-fix": "prettier --write \"**/*.{json,md}\"",
     "pretest": "yarn run compile && yarn run lint",
     "test": "node ./out/test/runTest.js"
   },
