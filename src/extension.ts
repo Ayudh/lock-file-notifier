@@ -39,7 +39,7 @@ function validate() {
 }
 
 function yarnCheck() {
-  execRoot('yarn check').then(noop, handleChange);
+  execRoot('yarn check --integrity && yarn check --verify-tree').then(noop, handleChange);
 }
 
 function handleChange() {
