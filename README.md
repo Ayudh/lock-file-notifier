@@ -1,5 +1,9 @@
 # Lock File Notifier
 
+[![VS Marketplace](https://vsmarketplacebadge.apphb.com/version-short/ayudh.lock-file-notifier.svg)](https://marketplace.visualstudio.com/items?itemName=ayudh.lock-file-notifier)
+[![Github Deploy Action](https://img.shields.io/github/workflow/status/ayudh/lock-file-notifier/Deploy)](https://github.com/Ayudh/lock-file-notifier/actions?query=workflow%3ADeploy)
+![Downloads](https://vsmarketplacebadge.apphb.com/downloads/ayudh.lock-file-notifier.svg)
+
 VSCode extension which validates `yarn.lock` or `package-lock.json` file and
 notifies if `install` step needs to run.
 
