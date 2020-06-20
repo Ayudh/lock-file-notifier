@@ -21,7 +21,7 @@
   "engines": {
     "vscode": "^1.42.0"
   },
-  "icon": "images/icon.jpg",
+  "icon": "images/icon.png",
   "publisher": "ayudh",
   "categories": [
     "Other"
