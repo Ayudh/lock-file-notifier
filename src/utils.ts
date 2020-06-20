@@ -1,5 +1,13 @@
 import { exec } from 'child_process';
 
+export const YARN_LOCK = 'yarn.lock';
+export const PACKAGE_LOCK = 'package-lock.json';
+
+export enum REPO_TYPE {
+  YARN = 'yarn',
+  NPM = 'npm'
+}
+
 export const noop = () => {};
 
 export function execPath(path: string) {
