@@ -17,7 +17,7 @@ Note: Extension is in development phase. See below for WIP actions.
 #### To Do
 
 - [x] NPM support
-- [ ] display prompt to run install step
+- [x] display prompt to run install step
 - [ ] debounce lock file change event
 - [ ] display progress bar in UI during validation
 - [ ] support multi-workspace with list of lock files provided as input

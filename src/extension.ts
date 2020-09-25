@@ -8,6 +8,8 @@ let watchListener: vscode.Disposable;
 let execRoot: ReturnType<typeof execPath>;
 let repoType: REPO_TYPE;
 
+type PackageManagerConfiguration = 'yarn' | 'npm' | undefined;
+
 export function activate(_context: vscode.ExtensionContext) {
   console.log('"lock-file-notifier" is now active!');
 
@@ -69,9 +71,51 @@ function npmCheck() {
   });
 }
 
+function getPackageManagerConfig(): PackageManagerConfiguration {
+  const config = vscode.workspace.getConfiguration().inspect('npm.packageManager');
+  const globalConfig = config?.globalValue;
+  const workspaceConfig = config?.workspaceValue;
+
+  const pickValueFromConfig = (config: unknown): PackageManagerConfiguration => {
+    if (typeof config !== 'string' || (config !== 'yarn' && config !== 'npm')) {
+      return undefined;
+    }
+
+    return config;
+  };
+
+  return pickValueFromConfig(workspaceConfig) || pickValueFromConfig(globalConfig);
+}
+
+function setPackageManagerConfig(value: PackageManagerConfiguration) {
+  vscode.workspace.getConfiguration().update('npm.packageManager', value, false);
+}
+
+function executeInstallTask() {
+  const packageManagerConfig = getPackageManagerConfig();
+  const repoType = REPO_TYPE.YARN ? 'yarn' : 'npm';
+
+  if (packageManagerConfig === undefined) {
+    setPackageManagerConfig(repoType);
+  }
+
+  vscode.tasks.fetchTasks({ type: 'npm' }).then(tasks => {
+    tasks.map(task => {
+      if (task.name === 'install') {
+        vscode.tasks.executeTask(task);
+      }
+    });
+  });
+}
+
 function handleChange() {
-  const installStep = repoType === REPO_TYPE.YARN ? 'yarn' : 'npm install';
-  vscode.window.showInformationMessage(`Lock file changed. Run "${installStep}".`);
+  const installButton = 'Install dependencies';
+
+  vscode.window.showInformationMessage('Lock file changed', installButton).then(selection => {
+    if (selection === installButton) {
+      executeInstallTask();
+    }
+  });
 }
 
 export function deactivate() {
