@@ -8,8 +8,6 @@ let watchListener: vscode.Disposable;
 let execRoot: ReturnType<typeof execPath>;
 let repoType: REPO_TYPE;
 
-type PackageManagerConfiguration = 'yarn' | 'npm' | undefined;
-
 export function activate(_context: vscode.ExtensionContext) {
   console.log('"lock-file-notifier" is now active!');
 
@@ -71,32 +69,19 @@ function npmCheck() {
   });
 }
 
-function getPackageManagerConfig(): PackageManagerConfiguration {
-  const config = vscode.workspace.getConfiguration().inspect('npm.packageManager');
-  const globalConfig = config?.globalValue;
-  const workspaceConfig = config?.workspaceValue;
-
-  const pickValueFromConfig = (config: unknown): PackageManagerConfiguration => {
-    if (typeof config !== 'string' || (config !== 'yarn' && config !== 'npm')) {
-      return undefined;
-    }
-
-    return config;
-  };
-
-  return pickValueFromConfig(workspaceConfig) || pickValueFromConfig(globalConfig);
+function getPackageManagerConfig() {
+  return vscode.workspace.getConfiguration().get('npm.packageManager') as REPO_TYPE;
 }
 
-function setPackageManagerConfig(value: PackageManagerConfiguration) {
-  vscode.workspace.getConfiguration().update('npm.packageManager', value, false);
+function setPackageManagerConfig(value: REPO_TYPE) {
+  return vscode.workspace.getConfiguration().update('npm.packageManager', value, false);
 }
 
-function executeInstallTask() {
+async function executeInstallTask() {
   const packageManagerConfig = getPackageManagerConfig();
-  const repoType = REPO_TYPE.YARN ? 'yarn' : 'npm';
 
-  if (packageManagerConfig === undefined) {
-    setPackageManagerConfig(repoType);
+  if (packageManagerConfig !== repoType) {
+    await setPackageManagerConfig(repoType);
   }
 
   vscode.tasks.fetchTasks({ type: 'npm' }).then(tasks => {
