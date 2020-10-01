@@ -12,5 +12,5 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.formatOnSave": true,
-  "gitlens.blame.avatars": true
+  "npm.packageManager": "yarn"
 }
