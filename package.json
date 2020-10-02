@@ -34,7 +34,12 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": []
+    "commands": [
+      {
+        "command": "lock-file-notifier.validate",
+        "title": "Lock File Notifier: Validate"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",

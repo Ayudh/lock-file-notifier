@@ -4,11 +4,10 @@ import * as path from 'path';
 import { existsSync } from 'fs';
 import { execPath, noop, REPO_TYPE, YARN_LOCK, PACKAGE_LOCK } from './utils';
 
-let watchListener: vscode.Disposable;
 let execRoot: ReturnType<typeof execPath>;
 let repoType: REPO_TYPE;
 
-export function activate(_context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
   console.log('"lock-file-notifier" is now active!');
 
   let rootPath = vscode.workspace.workspaceFolders?.[0].uri.fsPath || '';
@@ -36,11 +35,26 @@ export function activate(_context: vscode.ExtensionContext) {
   validate();
   console.log(`listening for changes in ${watchPath}`);
 
-  watchListener = vscode.workspace
+  const watchListener = vscode.workspace
     .createFileSystemWatcher(new vscode.RelativePattern(rootPath, watchPath))
     .onDidChange(() => {
       validate();
     });
+  context.subscriptions.push(watchListener);
+
+  const commandId = 'lock-file-notifier.validate';
+  context.subscriptions.push(
+    vscode.commands.registerCommand(commandId, () => {
+      validate();
+    })
+  );
+
+  const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right);
+  statusBarItem.command = commandId;
+  statusBarItem.text = '🔔';
+  statusBarItem.tooltip = 'Lock File Notifier: Validate';
+  statusBarItem.show();
+  context.subscriptions.push(statusBarItem);
 }
 
 function validate() {
@@ -111,10 +125,4 @@ function handleChange() {
       executeInstallTask();
     }
   });
-}
-
-export function deactivate() {
-  if (watchListener) {
-    watchListener.dispose();
-  }
 }
