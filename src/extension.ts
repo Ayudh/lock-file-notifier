@@ -51,7 +51,17 @@ function validate() {
   } else {
     validation = npmCheck();
   }
-  validation.then(noop, handleChange);
+  vscode.window
+    .withProgress(
+      {
+        location: vscode.ProgressLocation.Notification,
+        title: 'Lock File Notifier: Validating...'
+      },
+      () => {
+        return validation;
+      }
+    )
+    .then(noop, handleChange);
 }
 
 function yarnCheck() {
