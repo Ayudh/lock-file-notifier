@@ -13,6 +13,8 @@ step. This extension listens for changes in `yarn.lock` or `package-lock.json`
 and validates in the background against `node_modules`. Prompts to run
 install step.
 
+![Demo](demo.gif)
+
 ---
 
 Add the below setting corresponding to repo type
