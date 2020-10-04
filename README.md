@@ -37,6 +37,6 @@ Note: Extension is in development phase. See below for WIP actions.
 - [x] NPM support
 - [x] display prompt to run install step
 - [x] display progress bar in UI during validation
-- [ ] create a status bar item to trigger validation
+- [x] create a status bar item to trigger validation
 - [ ] support multi-workspace with list of lock files provided as input
 - [ ] listen for changes in workspace if lock file is created after opening
