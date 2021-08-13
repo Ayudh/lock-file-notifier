@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v1.1.0
+      - uses: actions/setup-node@v2
       - run: bash ./.github/workflows/deploy.sh $TOKEN
         env:
           TOKEN: ${{ secrets.TOKEN }}
