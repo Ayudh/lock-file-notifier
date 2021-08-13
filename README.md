@@ -29,14 +29,3 @@ Add the below setting corresponding to repo type
 
 The setting is automatically added if there is a conflict with
 repo and default package manager.
-
-Note: Extension is in development phase. See below for WIP actions.
-
-#### To Do
-
-- [x] NPM support
-- [x] display prompt to run install step
-- [x] display progress bar in UI during validation
-- [x] create a status bar item to trigger validation
-- [ ] support multi-workspace with list of lock files provided as input
-- [ ] listen for changes in workspace if lock file is created after opening
